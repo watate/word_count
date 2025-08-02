@@ -66,7 +66,7 @@ void main() {
     test('German', () {
       const content =
           "Der kostenlose Google-Dienst übersetzt Wörter, Sätze und Webseiten sofort in Englisch und über 100 andere Sprachen.";
-      expect(wordsCount(content), equals(17));
+      expect(wordsCount(content), equals(16));
     });
 
     test('Italian', () {
@@ -90,13 +90,13 @@ void main() {
     test('Russian', () {
       const content =
           "Бесплатный сервис Google мгновенно переводит слова, фразы и веб-страницы между английским и более 100 другими языками.";
-      expect(wordsCount(content), equals(17));
+      expect(wordsCount(content), equals(16));
     });
 
     test('Ukrainian', () {
       const content =
           "Безкоштовна служба Google миттєво перекладає слова, фрази та веб-сторінки між англійською мовою та більш ніж 100 іншими мовами.";
-      expect(wordsCount(content), equals(19));
+      expect(wordsCount(content), equals(18));
     });
 
     test('Arabic', () {
@@ -120,7 +120,7 @@ void main() {
     test('Turkish', () {
       const content =
           "Google'ın ücretsiz hizmeti, kelimeleri, kelime öbeklerini ve web sayfalarını İngilizce ve 100'den fazla başka dilde anında çevirir.";
-      expect(wordsCount(content), equals(18));
+      expect(wordsCount(content), equals(17));
     });
 
     test('Polish', () {
@@ -198,7 +198,7 @@ void main() {
     test('Serbian', () {
       const content =
           "Гоогле-ова бесплатна услуга тренутно преводи речи, фразе и веб странице између енглеског и преко 100 других језика.";
-      expect(wordsCount(content), equals(18));
+      expect(wordsCount(content), equals(17));
     });
 
     test('Slovenian', () {
@@ -234,13 +234,13 @@ void main() {
     test('Macedonian', () {
       const content =
           'Бесплатната услуга на Google веднаш преведува зборови, фрази и веб-страници помеѓу англиски и повеќе од 100 други јазици.';
-      expect(wordsCount(content), equals(19));
+      expect(wordsCount(content), equals(18));
     });
 
     test('Bosnian', () {
       const content =
           "Google-ova besplatna usluga trenutno prevodi riječi, fraze i web stranice između engleskog i preko 100 drugih jezika.";
-      expect(wordsCount(content), equals(18));
+      expect(wordsCount(content), equals(17));
     });
 
     test('Albanian', () {
@@ -264,7 +264,7 @@ void main() {
     test('Basque', () {
       const content =
           "Google-ren doako zerbitzua ingelesez eta beste 100 hizkuntzatan baino gehiagotan hitzak, esaldiak eta web orriak itzultzen ditu instantan.";
-      expect(wordsCount(content), equals(19));
+      expect(wordsCount(content), equals(18));
     });
 
     test('Welsh', () {
@@ -300,13 +300,13 @@ void main() {
     test('Malay', () {
       const content =
           "Perkhidmatan percuma Google serta menterjemahkan kata-kata, frasa, dan laman web antara bahasa Inggeris dan lebih dari 100 bahasa lain.";
-      expect(wordsCount(content), equals(20));
+      expect(wordsCount(content), equals(19));
     });
 
     test('Filipino', () {
       const content =
           "Ang libreng serbisyo ng Google ay agad na nagta-translate ng mga salita, parirala, at mga web page sa pagitan ng Ingles at mahigit sa 100 iba pang mga wika.";
-      expect(wordsCount(content), equals(30));
+      expect(wordsCount(content), equals(29));
     });
 
     test('Thai', () {
@@ -354,7 +354,7 @@ void main() {
     test('Malayalam', () {
       const content =
           "ഇംഗ്ലീഷിലും കൂടാതെ 100-ലധികം ഭാഷകളിലുമുള്ള വാക്കുകളും വാചകങ്ങളും വെബ് പേജുകളും Google ൻറെ സൌജന്യ സേവനം തൽക്ഷണം വിവർത്തനം ചെയ്യുന്നു.";
-      expect(wordsCount(content), equals(16));
+      expect(wordsCount(content), equals(15));
     });
 
     test('Marathi', () {
@@ -390,19 +390,19 @@ void main() {
     test('Zulu', () {
       const content =
           "Insizakalo yamahhala yakwa-Google ishintsha ngokushesha amagama, imishwana, namakhasi ewebhu phakathi kweNgisi kanye nezinye izilimi ezingu-100.";
-      expect(wordsCount(content), equals(17));
+      expect(wordsCount(content), equals(15));
     });
 
     test('Xhosa', () {
       const content =
           "Inkonzo yamahhala ye-Google iguqulela ngokukhawuleza amagama, amabinzana kunye namaphepha ewebhu phakathi kweesiNgesi kunye nezinye iilwimi ezili-100.";
-      expect(wordsCount(content), equals(18));
+      expect(wordsCount(content), equals(16));
     });
 
     test('Yoruba', () {
       const content =
           "Iṣẹ ọfẹ ọfẹ ti Google lesekese tumọ ọrọ, gbolohun ọrọ, ati oju-iwe wẹẹbu laarin English ati ju 100 awọn ede miran lọ.";
-      expect(wordsCount(content), equals(23));
+      expect(wordsCount(content), equals(22));
     });
 
     test('Hausa', () {
@@ -414,7 +414,7 @@ void main() {
     test('Igbo', () {
       const content =
           "Ọrụ n'efu nke Google na-asụgharị okwu, ahịrịokwu, na ibe weebụ n'otu ntabi anya n'etiti English na karịa 100 asụsụ ndị ọzọ.";
-      expect(wordsCount(content), equals(22));
+      expect(wordsCount(content), equals(21));
     });
 
     test('Amharic', () {
@@ -432,7 +432,7 @@ void main() {
     test('Belarusian', () {
       const content =
           "Бясплатны сэрвіс Google імгненна перакладае словы, фразы і вэб-старонак паміж ангельскай і больш за 100 іншых моў.";
-      expect(wordsCount(content), equals(18));
+      expect(wordsCount(content), equals(17));
     });
 
     test('Armenian', () {
@@ -450,13 +450,13 @@ void main() {
     test('Azerbaijani', () {
       const content =
           "Google-un pulsuz xidməti İngilis dili ilə 100-dən çox digər dillər arasında sözləri, sözləri və veb səhifələrini dərhal tərcümə edir.";
-      expect(wordsCount(content), equals(21));
+      expect(wordsCount(content), equals(19));
     });
 
     test('Kazakh', () {
       const content =
           "Google-дің тегін қызметі ағылшын тілдері мен 100-ден астам басқа тілдердің арасындағы сөздерді, сөз тіркестерін және веб-беттерді жедел аударады.";
-      expect(wordsCount(content), equals(21));
+      expect(wordsCount(content), equals(18));
     });
 
     test('Kyrgyz', () {
@@ -468,7 +468,7 @@ void main() {
     test('Uzbek', () {
       const content =
           "Google bepul xizmati ingliz va 100 dan ortiq boshqa tillardagi so'zlar, iboralar va veb-sahifalarni bir zumda tarjima qiladi.";
-      expect(wordsCount(content), equals(19));
+      expect(wordsCount(content), equals(18));
     });
 
     test('Tajik', () {
@@ -480,7 +480,7 @@ void main() {
     test('Mongolian', () {
       const content =
           "Google-ийн үнэгүй үйлчилгээ нь англиар болон 100 гаруй хэлнүүдийн хооронд үг, хэллэг, вэб хуудсыг даруй орчуулдаг.";
-      expect(wordsCount(content), equals(17));
+      expect(wordsCount(content), equals(16));
     });
 
     test('Persian', () {
@@ -552,7 +552,7 @@ void main() {
     test('Cebuano', () {
       const content =
           "Ang libreng serbisyo sa Google diha-diha dayon naghubad sa mga pulong, hugpong sa mga pulong, ug mga panid sa web tali sa Iningles ug kapin sa 100 ka lain nga mga pinulongan.";
-      expect(wordsCount(content), equals(33));
+      expect(wordsCount(content), equals(32));
     });
 
     test('Javanese', () {
@@ -570,7 +570,7 @@ void main() {
     test('Sesotho', () {
       const content =
           "Tšebeletso ea mahala ea Google hang-hang e fetolela mantsoe, lipolelo le maqephe a maqephe pakeng tsa Senyesemane le lipuo tse ling tse fetang 100.";
-      expect(wordsCount(content), equals(25));
+      expect(wordsCount(content), equals(24));
     });
 
     test('Sundanese', () {
@@ -588,7 +588,7 @@ void main() {
     test('Scots Gaelic', () {
       const content =
           "Bidh seirbheis an-asgaidh Ghoogle a 'ciallachadh faclan, abairtean agus duilleagan eadar Beurla agus còrr is 100 cànan eile.";
-      expect(wordsCount(content), equals(19));
+      expect(wordsCount(content), equals(18));
     });
 
     test('Maori', () {
@@ -600,7 +600,7 @@ void main() {
     test('Malagasy', () {
       const content =
           "Ny tolotrasa maimaim-poana ao Google dia avy hatrany dia mandika teny, andian-teny, ary tranonkala misy eo amin'ny teny anglisy sy fiteny 100 mahery.";
-      expect(wordsCount(content), equals(25));
+      expect(wordsCount(content), equals(23));
     });
 
     test('Hmong', () {
