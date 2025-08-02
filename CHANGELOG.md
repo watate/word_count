@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.4] - 2025-08-02
+- Shorten pubspec description
+
 ## [1.0.3] - 2025-08-02
 - Update metadata
 
