@@ -1,6 +1,6 @@
 name: word_count
-description: Fastest multi-language word counting library (8.0 million words/s) for Dart that supports 85+ languages including CJK (Chinese, Japanese, Korean), European, South Asian, African, and Middle Eastern languages.
-version: 1.0.3
+description: Fastest multi-language word counting library (8.0 million words/s) for Dart that supports 85+ languages.
+version: 1.0.4
 repository: https://github.com/watate/word_count
 homepage: https://github.com/watate/word_count
 
