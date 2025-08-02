@@ -1,7 +1,8 @@
 import 'dart:typed_data';
 
 // Performance optimization constants
-const int _maxCodePoint = 205743; // Maximum Unicode code point we need to support
+const int _maxCodePoint =
+    205743; // Maximum Unicode code point we need to support
 const int _byteSize = 8; // 8 bits per byte
 
 // Bitmap for fast character classification (word boundary vs word character)
@@ -10,17 +11,17 @@ final Uint8List _boundaryBitmap = Uint8List((_maxCodePoint ~/ _byteSize) + 1);
 
 // CJK Unicode ranges for character-level tokenization
 const List<List<int>> _cjkRanges = [
-  [19968, 40959], // CJK Unified Ideographs                     4E00-9FFF   
-  [13312, 19903], // CJK Unified Ideographs Extension A         3400-4DBF   
-  [131072, 173791], // CJK Unified Ideographs Extension B       20000-2A6DF 
-  [173824, 177983], // CJK Unified Ideographs Extension C       2A700–2B73F 
-  [177984, 178207], // CJK Unified Ideographs Extension D       2B740–2B81F 
-  [178208, 183983], // CJK Unified Ideographs Extension E       2B820–2CEAF 
-  [183984, 191471], // CJK Unified Ideographs Extension F       2CEB0–2EBEF  
-  [196608, 201551], // CJK Unified Ideographs Extension G       30000–3134F  
-  [201552, 205743], // CJK Unified Ideographs Extension H       31350–323AF 
-  [63744, 64255], // CJK Compatibility Ideographs               F900-FAFF   
-  [194560, 195103], // CJK Compatibility Ideographs Supplement  2F800-2FA1F 
+  [19968, 40959], // CJK Unified Ideographs                     4E00-9FFF
+  [13312, 19903], // CJK Unified Ideographs Extension A         3400-4DBF
+  [131072, 173791], // CJK Unified Ideographs Extension B       20000-2A6DF
+  [173824, 177983], // CJK Unified Ideographs Extension C       2A700–2B73F
+  [177984, 178207], // CJK Unified Ideographs Extension D       2B740–2B81F
+  [178208, 183983], // CJK Unified Ideographs Extension E       2B820–2CEAF
+  [183984, 191471], // CJK Unified Ideographs Extension F       2CEB0–2EBEF
+  [196608, 201551], // CJK Unified Ideographs Extension G       30000–3134F
+  [201552, 205743], // CJK Unified Ideographs Extension H       31350–323AF
+  [63744, 64255], // CJK Compatibility Ideographs               F900-FAFF
+  [194560, 195103], // CJK Compatibility Ideographs Supplement  2F800-2FA1F
   [12032, 12255], // CJK Radicals / Kangxi Radicals             2F00–2FDF
   [11904, 12031], // CJK Radicals Supplement                    2E80–2EFF
   [12288, 12351], // CJK Symbols and Punctuation                3000–303F
@@ -42,7 +43,7 @@ bool _bitmapInitialized = false;
 
 void _initializeBitmap() {
   if (_bitmapInitialized) return;
-  
+
   // Only mark basic whitespace as boundaries in bitmap
   // Punctuation handling should be done via configuration, not bitmap
   final boundaries = [
@@ -55,16 +56,16 @@ void _initializeBitmap() {
     4961, // Ethiopic wordspace \u1361
     8203, // Zero-width space \u200b
   ];
-  
+
   for (final charCode in boundaries) {
     _setBitmapBit(charCode);
   }
-  
+
   // Mark CJK ranges as character boundaries (each character is a word)
   for (final range in _cjkRanges) {
     _setBitmapRange(range[0], range[1]);
   }
-  
+
   _bitmapInitialized = true;
 }
 
@@ -77,7 +78,11 @@ void _setBitmapBit(int charCode) {
 }
 
 void _setBitmapRange(int from, int to) {
-  for (int i = from ~/ _byteSize; i <= (to ~/ _byteSize) && i < _boundaryBitmap.length; i++) {
+  for (
+    int i = from ~/ _byteSize;
+    i <= (to ~/ _byteSize) && i < _boundaryBitmap.length;
+    i++
+  ) {
     _boundaryBitmap[i] = 0xFF; // Mark entire byte
   }
 }
@@ -101,10 +106,11 @@ bool _isLetterOrDigit(int charCode) {
   // ASCII letters and digits
   if ((charCode >= 48 && charCode <= 57) || // 0-9
       (charCode >= 65 && charCode <= 90) || // A-Z
-      (charCode >= 97 && charCode <= 122)) { // a-z
+      (charCode >= 97 && charCode <= 122)) {
+    // a-z
     return true;
   }
-  
+
   // Extended Latin characters (matching original RegExp ranges)
   if ((charCode >= 0x00C0 && charCode <= 0x00FF) || // Latin-1 Supplement
       (charCode >= 0x0100 && charCode <= 0x017F) || // Latin Extended-A
@@ -113,24 +119,28 @@ bool _isLetterOrDigit(int charCode) {
       (charCode >= 0x1E00 && charCode <= 0x1EFF) || // Latin Extended Additional
       (charCode >= 0x0400 && charCode <= 0x04FF) || // Cyrillic
       (charCode >= 0x0500 && charCode <= 0x052F) || // Cyrillic Supplement
-      (charCode >= 0x0D00 && charCode <= 0x0D7F)) { // Malayalam
+      (charCode >= 0x0D00 && charCode <= 0x0D7F)) {
+    // Malayalam
     return true;
   }
-  
+
   // Arabic script
   if ((charCode >= 0x0600 && charCode <= 0x06FF) || // Arabic
       (charCode >= 0x0750 && charCode <= 0x077F) || // Arabic Supplement
       (charCode >= 0x08A0 && charCode <= 0x08FF) || // Arabic Extended-A
-      (charCode >= 0xFB50 && charCode <= 0xFDFF) || // Arabic Presentation Forms-A
-      (charCode >= 0xFE70 && charCode <= 0xFEFF)) { // Arabic Presentation Forms-B
+      (charCode >= 0xFB50 &&
+          charCode <= 0xFDFF) || // Arabic Presentation Forms-A
+      (charCode >= 0xFE70 && charCode <= 0xFEFF)) {
+    // Arabic Presentation Forms-B
     return true;
   }
-  
+
   // Hebrew script
-  if ((charCode >= 0x0590 && charCode <= 0x05FF)) { // Hebrew
+  if ((charCode >= 0x0590 && charCode <= 0x05FF)) {
+    // Hebrew
     return true;
   }
-  
+
   // Devanagari (Hindi and other Indic languages)
   if ((charCode >= 0x0900 && charCode <= 0x097F) || // Devanagari
       (charCode >= 0x0980 && charCode <= 0x09FF) || // Bengali
@@ -143,27 +153,31 @@ bool _isLetterOrDigit(int charCode) {
       (charCode >= 0x0D80 && charCode <= 0x0DFF) || // Sinhala
       (charCode >= 0x0E00 && charCode <= 0x0E7F) || // Thai
       (charCode >= 0x0E80 && charCode <= 0x0EFF) || // Lao
-      (charCode >= 0x1000 && charCode <= 0x109F)) { // Myanmar
+      (charCode >= 0x1000 && charCode <= 0x109F)) {
+    // Myanmar
     return true;
   }
-  
+
   // Additional scripts
   if ((charCode >= 0x0370 && charCode <= 0x03FF) || // Greek
       (charCode >= 0x0530 && charCode <= 0x058F) || // Armenian
       (charCode >= 0x10A0 && charCode <= 0x10FF) || // Georgian
-      (charCode >= 0x1100 && charCode <= 0x11FF) || // Hangul Jamo (already covered in CJK)
+      (charCode >= 0x1100 &&
+          charCode <= 0x11FF) || // Hangul Jamo (already covered in CJK)
       (charCode >= 0x1200 && charCode <= 0x137F) || // Ethiopic
       (charCode >= 0x13A0 && charCode <= 0x13FF) || // Cherokee
-      (charCode >= 0x1400 && charCode <= 0x167F) || // Unified Canadian Aboriginal Syllabics
+      (charCode >= 0x1400 &&
+          charCode <= 0x167F) || // Unified Canadian Aboriginal Syllabics
       (charCode >= 0x1680 && charCode <= 0x169F) || // Ogham
       (charCode >= 0x16A0 && charCode <= 0x16FF) || // Runic
       (charCode >= 0x1700 && charCode <= 0x171F) || // Tagalog
       (charCode >= 0x1720 && charCode <= 0x173F) || // Hanunoo
       (charCode >= 0x1740 && charCode <= 0x175F) || // Buhid
-      (charCode >= 0x1760 && charCode <= 0x177F)) { // Tagbanwa
+      (charCode >= 0x1760 && charCode <= 0x177F)) {
+    // Tagbanwa
     return true;
   }
-  
+
   return false;
 }
 
@@ -171,11 +185,11 @@ bool _isNonWordCharacter(int charCode) {
   // Characters that the original RegExp would NOT match as word characters
   // This includes punctuation and symbols that should split words
   // when not explicitly configured as punctuation
-  
+
   // But for config cases where default punctuation is disabled,
   // we should be more permissive and only split on what was actually
   // specified in the original RegExp word boundaries
-  
+
   // The original RegExp only matched specific character ranges, so anything
   // outside those ranges would be treated as word boundaries
   return !_isLetterOrDigit(charCode) && !_isCjkChar(charCode);
@@ -184,9 +198,9 @@ bool _isNonWordCharacter(int charCode) {
 WordCountResult _fastAsciiWordCount(String text, WordCountConfig config) {
   // Optimized ASCII-only word counting using simple splitting
   // This mimics the performance of split() while maintaining compatibility
-  
+
   String processedText = text;
-  
+
   // Handle punctuation according to config
   if (config.punctuationAsBreaker) {
     // Replace punctuation with spaces
@@ -199,13 +213,13 @@ WordCountResult _fastAsciiWordCount(String text, WordCountConfig config) {
       processedText = processedText.replaceAll(punct, '');
     }
   }
-  
+
   // Split on whitespace and filter empty words
   final words = processedText
       .split(RegExp(r'\s+'))
       .where((word) => word.isNotEmpty)
       .toList();
-  
+
   return WordCountResult(words: words, count: words.length);
 }
 
@@ -218,7 +232,7 @@ WordCountResult _fastAsciiWordCount(String text, WordCountConfig config) {
 /// - Currency and symbols: $, ￥, *, /, \, &, %, @, #, ^
 /// - Word separators: apostrophe ('), hyphen (-)
 ///
-/// These characters are converted to spaces by default (when 
+/// These characters are converted to spaces by default (when
 /// [WordCountConfig.punctuationAsBreaker] is true), or removed when false.
 const List<String> defaultPunctuation = [
   ',',
@@ -267,7 +281,7 @@ const List<String> defaultPunctuation = [
   '@',
   '#',
   '^',
-  '-',  // Added hyphen to default punctuation
+  '-', // Added hyphen to default punctuation
   '、',
   '、',
   '、',
@@ -305,7 +319,7 @@ class WordCountConfig {
   ///
   /// When `false` (default), punctuation is simply removed, allowing contractions
   /// to be treated as single words. When `true`, punctuation creates word boundaries.
-  /// 
+  ///
   /// Examples:
   /// - `false`: "don't" → ["dont"] (1 word)
   /// - `true`: "don't" → ["don", "t"] (2 words)
@@ -326,7 +340,8 @@ class WordCountConfig {
 
   /// Creates a new word count configuration.
   const WordCountConfig({
-    this.punctuationAsBreaker = false,  // Default: punctuation is removed, not used as breaker
+    this.punctuationAsBreaker =
+        false, // Default: punctuation is removed, not used as breaker
     this.disableDefaultPunctuation = false,
     this.punctuation = const [],
   });
@@ -403,7 +418,7 @@ WordCountResult wordsDetect(
   // Pre-compute punctuation lookup for custom punctuation
   final customPunctuationSet = <int>{};
   final defaultPunctuationSet = <int>{};
-  
+
   if (!config.disableDefaultPunctuation) {
     for (final punct in defaultPunctuation) {
       if (punct.isNotEmpty) {
@@ -411,7 +426,7 @@ WordCountResult wordsDetect(
       }
     }
   }
-  
+
   for (final punct in config.punctuation) {
     if (punct.isNotEmpty) {
       customPunctuationSet.add(punct.codeUnitAt(0));
@@ -426,7 +441,9 @@ WordCountResult wordsDetect(
     }
   }
 
-  if (isAsciiOnly && config.disableDefaultPunctuation == false && config.punctuation.isEmpty) {
+  if (isAsciiOnly &&
+      config.disableDefaultPunctuation == false &&
+      config.punctuation.isEmpty) {
     // Fast path for ASCII-only text with default configuration
     return _fastAsciiWordCount(text, config);
   }
@@ -449,8 +466,9 @@ WordCountResult wordsDetect(
     }
 
     // Check custom punctuation
-    final isCustomPunctuation = customPunctuationSet.contains(charCode) || 
-                               defaultPunctuationSet.contains(charCode);
+    final isCustomPunctuation =
+        customPunctuationSet.contains(charCode) ||
+        defaultPunctuationSet.contains(charCode);
 
     if (isCustomPunctuation) {
       if (config.punctuationAsBreaker) {
@@ -467,7 +485,7 @@ WordCountResult wordsDetect(
     }
 
     // Handle Unicode symbols (similar to original logic)
-    if (charCode >= 0xFF00 && charCode <= 0xFFEF || 
+    if (charCode >= 0xFF00 && charCode <= 0xFFEF ||
         charCode >= 0x2000 && charCode <= 0x206F) {
       if (inWord && wordBuffer.isNotEmpty) {
         words.add(wordBuffer.toString());
@@ -510,7 +528,7 @@ WordCountResult wordsDetect(
     if (!isCjk && !isCustomPunctuation && !isBoundary) {
       // Check if this character would be treated as punctuation in the original RegExp approach
       final isNonWordChar = _isNonWordCharacter(charCode);
-      
+
       if (isNonWordChar && !_isLetterOrDigit(charCode)) {
         // This is a character that would split words in the original implementation
         if (inWord && wordBuffer.isNotEmpty) {
