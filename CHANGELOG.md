@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.3] - 2025-08-02
+- Update metadata
+
 ## [1.0.2] - 2025-08-02
 - Improved performance by 15.6x using bitmaps instead of regex
 
