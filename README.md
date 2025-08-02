@@ -12,6 +12,7 @@ Fastest multi-language word counting library (8.0 million words/s) for Dart that
 - **Comprehensive testing**: 118+ tests covering all supported languages and edge cases
 
 ## Performance
+
 | Method | Words/s | GB/s | Relative Speed |
 |--------|---------|------|----------------|
 | New Implementation (Bitmap) | 8.0M | 0.044 | 1.0x |
